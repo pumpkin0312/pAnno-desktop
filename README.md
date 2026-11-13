@@ -2,7 +2,7 @@
 
 [![下载最新版](https://img.shields.io/github/v/release/pumpkin0312/pAnno-desktop?label=下载最新版)](../../releases/latest)
 
-**pAnno 的 Windows 完整发行版：图形界面 + pAnno 分析程序 + pFind 搜索引擎，下载即用。**
+**pAnno 的完整发行版：图形界面 + pAnno 分析程序 + pFind 搜索引擎，下载即用。Windows 版带图形界面，另有 Linux 命令行版。**
 
 ---
 
@@ -32,11 +32,13 @@ pAnno 是一个**蛋白质基因组学**（proteogenomics）分析流程，由�
 
 到 [Releases](../../releases/latest) 下载，二选一：
 
-- **`pAnno-desktop-v0.3.1-Setup.exe`**：安装包（推荐），默认装到 `C:\pAnno`。已经装过旧版时，运行它就是更新
-- **`pAnno-desktop-v0.3.1-portable.zip`**：免安装，解压即用
+- **`pAnno-desktop-v0.4.0-Setup.exe`**：Windows 安装包（推荐），默认装到 `C:\pAnno`。已经装过旧版时，运行它就是更新
+- **`pAnno-desktop-v0.4.0-portable.zip`**：Windows 免安装版，解压即用
+- **`pAnno-linux-v0.4.0-x86_64.tar.gz`**：Linux 命令行版，解压即用，安装方法见[《使用说明》](使用说明.md)第 1.2 节
 
 **系统要求**：
 - 图形界面：64 位 Windows 10 / 11；命令行：64 位 Windows 即可（Windows 10 之前的系统未经测试）。
+- Linux 命令行版：64 位 x86 Linux，CentOS 7 及更新的发行版，不需要 root 权限。
 - 内存需求随基因组大小和参数设置增加，大基因组需要较大的内存。内存不够时的处理办法见《使用说明》第 7 节。
 
 **安装路径和数据路径都不能包含空格。**
@@ -49,30 +51,37 @@ pAnno 是一个**蛋白质基因组学**（proteogenomics）分析流程，由�
 3. 在「运行」页点「▶ 运行」。
 4. 跑完后自动跳到「结果」页。
 
-**命令行**：
+**命令行**（在任意目录都可以运行）：
+
+Windows：
 
 ```bat
-cd /d C:\pAnno\pAnnobin
-pAnno.exe D:\work\pAnno.cfg 0
+C:\pAnno\pAnnobin\pAnno.exe D:\work\pAnno.cfg 0
+```
+
+Linux：
+
+```bash
+~/apps/pAnno-linux-v0.4.0/pAnno /work/pAnno.cfg 0
 ```
 
 ## 文档
 
 | 文档 | 内容 |
 |---|---|
-| [使用说明](使用说明.md) | 安装、准备数据、图形界面与命令行两种用法、结果文件、出错处理、内存与磁盘 |
+| [使用说明](使用说明.md) | Windows 与 Linux 的安装、准备数据、图形界面与命令行两种用法、结果文件、出错处理、内存与磁盘 |
 | [参数说明](参数说明.md) | 每个参数的含义和常见场景的调法 |
 | [更新说明](更新说明.md) | 各版本的更新内容 |
 
-## 本版重点（v0.3.1）
+## 本版重点（v0.4.0）
 
-支持其他软件导出的 MGF，新增运行前的全面参数检查，并全新改版了基因组浏览器。具体内容见[更新说明](更新说明.md)。
+新增 Linux 命令行版，并支持在任意目录运行 pAnno。具体内容见[更新说明](更新说明.md)。
 
 ## 已知限制
 
 - 质谱数据只支持 **MGF**，且要符合 Mascot 规范，注意事项见《使用说明》第 2 节。
 - 路径不能包含空格。
-- 只提供 Windows 版本。图形界面需要 Windows 10 / 11。
+- 图形界面只有 Windows 版，需要 Windows 10 / 11。Linux 版目前只有命令行。
 
 ## 反馈
 

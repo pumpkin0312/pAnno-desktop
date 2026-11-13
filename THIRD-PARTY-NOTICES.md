@@ -1,6 +1,6 @@
 # 版权与第三方组件声明
 
-pAnno-desktop 发行包由以下几部分组成。图形界面部分以 MIT 许可发布（见 `LICENSE`）；
+pAnno-desktop 发行包（Windows 版与 Linux 命令行版）由以下几部分组成。图形界面部分以 MIT 许可发布（见 `LICENSE`）；
 其余组件的版权与许可各自独立，列于下文。
 
 ---
@@ -10,31 +10,32 @@ pAnno-desktop 发行包由以下几部分组成。图形界面部分以 MIT 许�
 ## pAnno
 
 - 开发者：中国科学院计算技术研究所 pFind 团队（王凯菲 等）
-- 位置：`pAnnobin/`（`pAnno.exe`、`SplicingFinder.exe` 及同目录的 `lib*.dll`）
-- 版权归原作者所有。本发行包中的 `pAnno.exe` 包含 v0.3.0 的修复（见《更新说明》）。
+- 位置：Windows 版 `pAnnobin/`（`pAnno.exe`、`SplicingFinder.exe`）；Linux 版压缩包根目录（`pAnno`、`SplicingFinder`）
+- 版权归原作者所有。本发行包中的 pAnno 包含各版本的修复（见《更新说明》）。
 
 ## DBReducer
 
 - 开发者：王凯菲（中国科学院计算技术研究所）
-- 位置：`pAnnobin/thirdparty/DBReducer/`
-- 版权归原作者所有。本发行包中的 `DBReducer.exe` 包含 v0.3.0 的修复。
+- 位置：`pAnnobin/thirdparty/DBReducer/`（Linux 版为 `thirdparty/DBReducer/`）
+- 版权归原作者所有。本发行包中的 DBReducer 包含各版本的修复。
 
 ## pFind（pAnno 定制版）
 
 - 本包中的 pFind 是**基于 pFind 3.2.3 定制、专门用于 pAnno 的版本**
 - 开发者：中国科学院计算技术研究所 pFind 团队
 - 项目主页：http://pfind.org
-- 位置：`pAnnobin/thirdparty/pFind3/`
+- 位置：`pAnnobin/thirdparty/pFind3/`（Linux 版为 `thirdparty/pFind3/`）
 - 版权归 pFind 团队所有，**经 pFind 团队授权随本发行包分发**。
 - 与 pFind 3.2.3 相比，`libTagFlow.dll`、`libETagFlow.dll`、`libProSalvoFT.dll`、`libPeXSDK.dll` 四个动态库经过修改：
   - 修复了搜索线程等待中偶发的卡死；
   - 读库时不再一开始就按整个库的条目数预留内存。
+- Linux 版中的 pFind 是同一定制版在 Linux 上的编译，包含相同的修改，只有 8 个可执行文件（静态链接，没有单独的动态库）。
 - 随附的用户手册（`pFind 3 UserGuide.pdf`、`pBuild user manual.pdf`、`pFind3-result-interpretation-v3.1.5.pdf`）版权同属 pFind 团队。
 
 ### pFind 3 中未随本包分发的部分
 
 pFind 3 的完整安装目录里还捆绑了一批厂商库与工具。本包只保留 pAnno 两轮搜库实际用到的
-8 个可执行文件和 12 个动态库，**以下组件不在本包内**：
+8 个可执行文件和 12 个动态库（Linux 版只有 8 个可执行文件），**以下组件不在本包内**：
 
 - Thermo Fisher Scientific CommonCore / RawFileReader（读 `.raw`）
 - SCIEX Clearcore2（读 `.wiff`）
@@ -52,18 +53,19 @@ pFind 3 的完整安装目录里还捆绑了一批厂商库与工具。本包只
 
 ## MinGW-w64 / GCC 运行库
 
-- 文件：`libgcc_s_seh-1.dll`、`libgcc_s_sjlj-1.dll`、`libstdc++-6.dll`、`libgomp-1.dll`、`libwinpthread-1.dll`
-  （分布在 `pAnnobin/`、`pAnnobin/thirdparty/DBReducer/`、`pAnnobin/thirdparty/pFind3/bin/` 中）
+- Windows 版：pFind 目录 `pAnnobin/thirdparty/pFind3/bin/` 中的 `libgcc_s_sjlj-1.dll`、`libstdc++-6.dll`、`libwinpthread-1.dll`；`pAnno.exe`、`SplicingFinder.exe`、`DBReducer.exe` 把 `libgcc`、`libstdc++`、`libgomp`、`libwinpthread` 静态链接在程序内
+- Linux 版：全部程序静态链接了 `libgcc`、`libstdc++`、`libgomp`
 - `libgcc_s`、`libstdc++`、`libgomp`：GNU GPLv3，附 **GCC Runtime Library Exception**。该例外允许以任意条款分发链接了它们的程序。
   条款见 https://www.gnu.org/licenses/gcc-exception-3.1.html
 - `libwinpthread`：MinGW-w64 winpthreads，MIT 风格许可。见 https://www.mingw-w64.org
 
-## GMP（GNU Multiple Precision Arithmetic Library）
+## GNU C 库（glibc，仅 Linux 版）
 
-- 文件：`libgmp-10.dll`、`libgmpxx-4.dll`
-- 许可：**GNU LGPLv3**（或 GPLv2，二选一）
-- 源代码：https://gmplib.org
-- 以独立动态库形式提供，可以用兼容版本替换。
+- Linux 版的全部程序静态链接了 glibc，以便在不同发行版上直接运行
+- 许可：**GNU LGPLv2.1 或更高版本**，全文见 https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+- 版本：2.35（Ubuntu 22.04 所带版本）
+- 源代码：https://www.gnu.org/software/libc/
+- 如需用修改过的 glibc 重新链接本包中的程序，可以通过发布页联系我们，获取相应的目标文件。
 
 ---
 
